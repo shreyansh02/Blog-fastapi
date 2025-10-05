@@ -1,31 +1,31 @@
 from typing import Optional
 from fastapi import APIRouter, status, Response
-from ..controllers import app_controller
-from ..models.general_models import Blog
+from ..controllers import blog_controller
+# from ..models.schemas import Blog
 
 router = APIRouter()
 
-@router.get("/v1/health")
+@router.get("/health")
 def health_check():
     return {
         "message": "Health Check OK", 
         "status": "success"
     }
 
-@router.get("/v1/blog/unpublished")
+@router.get("/blog/unpublished")
 def unpublished_blogs():
     return {
         "data": "List of unpublished blogs"
     }
 
-@router.get("/v1/blog/{blog_id}")
-def about_blog(blog_id: int):
+@router.get("/blog/{id}")
+def about_blog(id: int):
     return {
-        "data": blog_id
+        "data": id
     }
 
 # /v1/blogs?limit=10&published=true
-@router.get("/v1/blogs")
+@router.get("/blog")
 def get_blogs(
     limit: int = 10, 
     published: bool = True,
@@ -35,8 +35,8 @@ def get_blogs(
         "data": f"List of all blogs with limit {limit} and published {published}"
     }
 
-@router.post("/v1/blog/create")
-def create_blog(request: Blog):
-    return {
-        "data": f"Blog is created with title as {request.title}"
-    }
+# @router.post("/blog/create")
+# def create_blog(request: Blog):
+#     return {
+#         "data": f"Blog is created with title as {request.title}"
+#     }
